@@ -176,6 +176,21 @@ This project was developed using **AI-native development practices** with extens
   <p><strong>Expense Report Screen</strong></p>
 </div>
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/f0fb2ebd-62d5-4c20-bc43-c6a8b6a7b1f8" alt="Expense List Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Search and Filter Screen</strong></p>
+</div>
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/0a79bda8-5aa1-4745-a2df-93869a9664db" alt="Expense List Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Theme Switcher</strong></p>
+</div>
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/76005297-dba2-4765-9617-8fec3230b1d1" alt="Expense List Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Chart and Analitycs</strong></p>
+</div>
+
 ### **Option 2: Markdown Format (Alternative)**
 If HTML doesn't display properly on GitHub, you can use this simpler format:
 
