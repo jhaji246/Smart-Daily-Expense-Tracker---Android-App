@@ -163,6 +163,15 @@ This project was developed using **AI-native development practices** with extens
 - Theme Switcher
 - Search & Filtering
 - Charts & Analytics
+- 
+<img width="1080" height="2160" alt="Expense Entry Screen" src="https://github.com/user-attachments/ass<img width="1080" height="2160" alt="Expense List Screen" src="https://github.com/user-attachments/assets/cb9bee04-7392-4f49-bff2-513202bc56da" />
+ets/c86599ee-6d56-4636-bf15-715a7fed8277" />
+img width="1080" height="2160" alt="Expense Report Screen" src="https://github.com/user-attachments/assets/aa34ede1-7543-4d60-b09b-1953e2564696" />
+<img width="1080" height="2160" alt="Theme Switcher" src="https://github.com/user-attachments/assets/f0cc00f2-f05f-4322-970c-58fe4d166469" />
+<img width="1080" height="2160" alt="Charts   Analytics" src="https://github.com/user-attachments/assets/4600859c-31ca-4ce7-9ffb-da024b9cc9d0" />
+
+
+- 
 
 ## 👨‍💻 Developer Information
 
