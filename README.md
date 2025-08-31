@@ -161,11 +161,12 @@ This project was developed using **AI-native development practices** with extens
 ### **Option 1: HTML Format (Recommended)**
 
 
-<div align="center">
+<div align="left">
   <img src="https://github.com/user-attachments/assets/34019f93-bde6-4833-a3a1-abfb4709029d" alt="Expense Entry Screen width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
   <p><strong>Expense Entry Screen</strong></p>
 </div> 
-<div align="center">
+
+<div align="right">
   <img src="https://github.com/user-attachments/assets/e04dbb23-1aa9-493c-8e2d-fc266d1447a8" alt="Expense List Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
   <p><strong>Expense List Screen</strong></p>
 </div>
