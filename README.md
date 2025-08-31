@@ -197,16 +197,6 @@ This project was developed using **AI-native development practices** with extens
 ### **Option 2: Markdown Format (Alternative)**
 If HTML doesn't display properly on GitHub, you can use this simpler format:
 
-| Screen | Screenshot |
-|--------|------------|
-| **Expense Entry** | ![Expense Entry](screenshots/expense-entry.png) |
-| **Expense List** | ![Expense List](screenshots/expense-list.png) |
-| **Expense Report** | ![Expense Report](screenshots/expense-report.png) |
-| **Theme Switcher** | ![Theme Switcher](screenshots/theme-switcher.png) |
-| **Search & Filtering** | ![Search & Filtering](screenshots/search-filtering.png) |
-| **Charts & Analytics** | ![Charts & Analytics](screenshots/charts-analytics.png) |
-| **Intelligent Insights** | ![Intelligent Insights](screenshots/intelligent-insights.png) |
-
 **Note:** All screenshots are optimized for GitHub display with consistent sizing and professional appearance.
 
 ## 👨‍💻 Developer Information
