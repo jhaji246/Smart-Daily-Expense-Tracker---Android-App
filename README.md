@@ -159,27 +159,10 @@ This project was developed using **AI-native development practices** with extens
 **Note:** Screenshots are included in the `screenshots/` folder showing:
 
 ### **Option 1: HTML Format (Recommended)**
-<div align="center" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-  <div>
-    <img src="https://github.com/user-attachments/assets/afec6049-ff9c-437a-8366-9a455aab16ba" alt="Expense Report Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
-    <p><strong>Expense Report Screen</strong></p>
-  </div>
-  
-  <div>
-    <img src="https://github.com/user-attachments/assets/f0fb2ebd-62d5-4c20-bc43-c6a8b6a7b1f8" alt="Search and Filter Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
-    <p><strong>Search and Filter Screen</strong></p>
-  </div>
-  
-  <div>
-    <img src="https://github.com/user-attachments/assets/0a79bda8-5aa1-4745-a2df-93869a9664db" alt="Theme Switcher" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
-    <p><strong>Theme Switcher</strong></p>
-  </div>
-  
-  <div>
-    <img src="https://github.com/user-attachments/assets/76005297-dba2-4765-9617-8fec3230b1d1" alt="Chart and Analytics" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
-    <p><strong>Chart and Analytics</strong></p>
-  </div>
-</div>
+
+| Expense Report Screen | Search and Filter Screen | Theme Switcher | Chart and Analytics |
+|------------------------|--------------------------|----------------|---------------------|
+| <img src="https://github.com/user-attachments/assets/afec6049-ff9c-437a-8366-9a455aab16ba" width="250"/> | <img src="https://github.com/user-attachments/assets/f0fb2ebd-62d5-4c20-bc43-c6a8b6a7b1f8" width="250"/> | <img src="https://github.com/user-attachments/assets/0a79bda8-5aa1-4745-a2df-93869a9664db" width="250"/> | <img src="https://github.com/user-attachments/assets/76005297-dba2-4765-9617-8fec3230b1d1" width="250"/> |
 
 ### **Option 2: Markdown Format (Alternative)**
 If HTML doesn't display properly on GitHub, you can use this simpler format:
