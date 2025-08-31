@@ -159,8 +159,10 @@ This project was developed using **AI-native development practices** with extens
 **Note:** Screenshots are included in the `screenshots/` folder showing:
 
 ### **Option 1: HTML Format (Recommended)**
+
+
 <div align="center">
-  <img src="screenshots/expense-entry.png" alt="Expense Entry Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <img width="1080" height="2160" alt="Expense Entry Screen" src="https://github.com/user-attachments/assets/34019f93-bde6-4833-a3a1-abfb4709029d" />
   <p><strong>Expense Entry Screen</strong></p>
 </div>
 
