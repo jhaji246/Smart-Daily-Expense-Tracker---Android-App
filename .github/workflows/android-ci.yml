@@ -1,0 +1,286 @@
+name: Android CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  release:
+    types: [ published ]
+
+env:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.parallel=true -Dorg.gradle.configureondemand=true
+
+jobs:
+  # Build and Test Job
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+        
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Run Unit Tests
+      run: ./gradlew testDebugUnitTest --console=plain
+      
+    - name: Run Instrumented Tests
+      run: ./gradlew connectedAndroidTest --console=plain
+      
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug --console=plain
+      
+    - name: Build Release APK
+      run: ./gradlew assembleRelease --console=plain
+      
+    - name: Upload Debug APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-debug
+        path: app/build/outputs/apk/debug/app-debug.apk
+        
+    - name: Upload Release APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-release
+        path: app/build/outputs/apk/release/app-release-unsigned.apk
+
+  # Code Quality Job
+  code-quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+        
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Run Lint
+      run: ./gradlew lintDebug --console=plain
+      
+    - name: Run Detekt (Static Code Analysis)
+      run: ./gradlew detekt --console=plain
+      
+    - name: Run Dependency Check
+      run: ./gradlew dependencyCheckAnalyze --console=plain
+      
+    - name: Generate Code Coverage Report
+      run: ./gradlew jacocoTestReport --console=plain
+      
+    - name: SonarQube Analysis
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # Download SonarQube Scanner
+        wget -q https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
+        unzip -q sonar-scanner-cli-4.8.0.2856-linux.zip
+        
+        # Set environment variables for SonarQube
+        export SONAR_SCANNER_HOME=sonar-scanner-4.8.0.2856-linux
+        export PATH=$PATH:$SONAR_SCANNER_HOME/bin
+        
+        # Run SonarQube analysis
+        sonar-scanner \
+          -Dsonar.projectKey=smart-daily-expense-tracker \
+          -Dsonar.sources=app/src/main/java \
+          -Dsonar.tests=app/src/test/java \
+          -Dsonar.java.binaries=app/build/intermediates/javac \
+          -Dsonar.java.test.binaries=app/build/intermediates/javac \
+          -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml \
+          -Dsonar.kotlin.detekt.reportPaths=app/build/reports/detekt/detekt.xml \
+          -Dsonar.android.lint.reportPaths=app/build/reports/lint-results.xml \
+          -Dsonar.host.url=$SONAR_HOST_URL \
+          -Dsonar.login=$SONAR_TOKEN \
+          -Dsonar.pullrequest.key=${{ github.event.number }} \
+          -Dsonar.pullrequest.branch=${{ github.head_ref }} \
+          -Dsonar.pullrequest.base=${{ github.base_ref }} \
+          -Dsonar.pullrequest.github.repository=${{ github.repository }}
+      
+    - name: Upload Lint Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: lint-results
+        path: app/build/reports/lint-results.xml
+        
+    - name: Upload Detekt Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: detekt-results
+        path: app/build/reports/detekt/
+        
+    - name: Upload Code Coverage Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: code-coverage
+        path: app/build/reports/jacoco/
+
+  # Security Scan Job
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Run OWASP Dependency Check
+      uses: dependency-check/Dependency-Check_Action@main
+      with:
+        project: 'Smart Daily Expense Tracker'
+        path: '.'
+        format: 'HTML'
+        out: 'reports'
+        args: >
+          --failOnCVSS 7
+          --enableRetired
+          
+    - name: Upload Security Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-report
+        path: reports/
+
+  # Performance Testing Job
+  performance-test:
+    name: Performance Testing
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+        
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Run Performance Tests
+      run: ./gradlew testDebugUnitTest --tests "*Performance*" --console=plain
+      
+    - name: Generate Performance Report
+      run: ./gradlew generatePerformanceReport --console=plain
+      
+    - name: Upload Performance Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: performance-report
+        path: app/build/reports/performance/
+
+  # Deploy to Internal Testing Job
+  deploy-internal:
+    name: Deploy to Internal Testing
+    runs-on: ubuntu-latest
+    needs: [build-and-test, code-quality, security-scan]
+    if: github.ref == 'refs/heads/develop'
+    environment: internal-testing
+    
+    steps:
+    - name: Download Debug APK
+      uses: actions/download-artifact@v3
+      with:
+        name: app-debug
+        
+    - name: Deploy to Firebase App Distribution
+      uses: wzieba/Firebase-Distribution-Github-Action@v1
+      with:
+        appId: ${{ secrets.FIREBASE_APP_ID }}
+        token: ${{ secrets.FIREBASE_TOKEN }}
+        groups: testers
+        file: app-debug.apk
+        releaseNotes: |
+          Build: ${{ github.sha }}
+          Branch: ${{ github.ref_name }}
+          Changes: ${{ github.event.head_commit.message }}
+
+  # Deploy to Production Job
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build-and-test, code-quality, security-scan, performance-test]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: production
+    
+    steps:
+    - name: Download Release APK
+      uses: actions/download-artifact@v3
+      with:
+        name: app-release
+        
+    - name: Sign APK
+      run: |
+        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
+        echo "${{ secrets.KEYSTORE_PASSWORD }}" > keystore_password.txt
+        echo "${{ secrets.KEY_ALIAS }}" > key_alias.txt
+        echo "${{ secrets.KEY_PASSWORD }}" > key_password.txt
+        
+    - name: Deploy to Google Play Store
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+        packageName: com.avi.smartdailyexpensetracker
+        releaseFiles: app-release-unsigned.apk
+        track: internal
+        status: completed
+
+  # Notification Job
+  notify:
+    name: Notify Team
+    runs-on: ubuntu-latest
+    needs: [deploy-internal, deploy-production]
+    if: always()
+    
+    steps:
+    - name: Notify Slack
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        channel: '#android-dev'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      if: always()

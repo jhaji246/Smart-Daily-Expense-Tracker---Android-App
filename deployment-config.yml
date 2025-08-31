@@ -1,0 +1,215 @@
+# 🚀 Deployment Configuration for Smart Daily Expense Tracker
+# This file contains configuration for different deployment environments
+
+# Environment configurations
+environments:
+  development:
+    name: "Development"
+    description: "Development environment for testing features"
+    branch: "develop"
+    auto_deploy: true
+    notifications:
+      slack_channel: "#android-dev"
+      email: "dev-team@company.com"
+    
+  staging:
+    name: "Staging"
+    description: "Staging environment for pre-production testing"
+    branch: "staging"
+    auto_deploy: false
+    requires_approval: true
+    notifications:
+      slack_channel: "#android-staging"
+      email: "qa-team@company.com"
+    
+  production:
+    name: "Production"
+    description: "Production environment for end users"
+    branch: "main"
+    auto_deploy: false
+    requires_approval: true
+    wait_timer: 300  # 5 minutes
+    notifications:
+      slack_channel: "#android-releases"
+      email: "release-team@company.com"
+
+# Build configurations
+build:
+  gradle_opts: "-Dorg.gradle.daemon=false -Dorg.gradle.parallel=true"
+  test_coverage_threshold: 80
+  security_scan_cvss_threshold: 7
+  
+  variants:
+    debug:
+      assemble_task: "assembleDebug"
+      test_task: "testDebugUnitTest"
+      lint_task: "lintDebug"
+      
+    release:
+      assemble_task: "assembleRelease"
+      test_task: "testReleaseUnitTest"
+      lint_task: "lintRelease"
+
+# Testing configurations
+testing:
+  unit_tests:
+    enabled: true
+    parallel_execution: true
+    coverage_report: true
+    
+  instrumented_tests:
+    enabled: true
+    device_pool: "android-device-pool"
+    
+  ui_tests:
+    enabled: false  # Enable when UI tests are implemented
+    device_pool: "android-emulator-pool"
+
+# Quality gates
+quality_gates:
+  - name: "Unit Tests"
+    condition: "All unit tests must pass"
+    required: true
+    
+  - name: "Code Coverage"
+    condition: "Minimum 80% code coverage"
+    required: true
+    
+  - name: "Lint Checks"
+    condition: "No critical lint issues"
+    required: true
+    
+  - name: "Security Scan"
+    condition: "No high/critical CVSS vulnerabilities"
+    required: true
+    
+  - name: "Performance Tests"
+    condition: "Performance benchmarks within acceptable range"
+    required: false
+
+# Deployment targets
+deployment_targets:
+  firebase_app_distribution:
+    enabled: true
+    app_id: "${FIREBASE_APP_ID}"
+    groups:
+      - "testers"
+      - "qa-team"
+      
+  google_play_store:
+    enabled: true
+    track: "internal"  # internal, alpha, beta, production
+    package_name: "com.avi.smartdailyexpensetracker"
+    
+  github_releases:
+    enabled: true
+    draft: false
+    prerelease: false
+
+# Notification settings
+notifications:
+  slack:
+    enabled: true
+    webhook_url: "${SLACK_WEBHOOK_URL}"
+    channels:
+      - "#android-dev"
+      - "#android-staging"
+      - "#android-releases"
+      
+  email:
+    enabled: false
+    smtp_server: "smtp.company.com"
+    from_address: "ci-cd@company.com"
+    
+  teams:
+    enabled: false
+    webhook_url: "${TEAMS_WEBHOOK_URL}"
+
+# Monitoring and alerting
+monitoring:
+  build_timeout: 1800  # 30 minutes
+  test_timeout: 900   # 15 minutes
+  deployment_timeout: 600  # 10 minutes
+  
+  alerts:
+    build_failure: true
+    test_failure: true
+    deployment_failure: true
+    security_vulnerability: true
+    
+  metrics:
+    build_duration: true
+    test_coverage: true
+    deployment_frequency: true
+    lead_time: true
+
+# Security settings
+security:
+  dependency_scanning:
+    enabled: true
+    schedule: "0 9 * * 1"  # Every Monday at 9 AM UTC
+    fail_on_cvss: 7
+    
+  code_signing:
+    enabled: true
+    keystore_path: "${KEYSTORE_PATH}"
+    key_alias: "${KEY_ALIAS}"
+    
+  secrets_management:
+    rotation_policy: "90_days"
+    audit_logging: true
+
+# Performance settings
+performance:
+  build_optimization:
+    gradle_daemon: false
+    parallel_builds: true
+    build_cache: true
+    
+  test_optimization:
+    parallel_execution: true
+    test_sharding: true
+    result_caching: true
+    
+  deployment_optimization:
+    incremental_deployment: true
+    rollback_strategy: "automatic"
+
+# Rollback configuration
+rollback:
+  enabled: true
+  automatic: false
+  max_versions: 5
+  health_check_timeout: 300
+  
+  triggers:
+    - "deployment_failure"
+    - "health_check_failure"
+    - "performance_degradation"
+    - "manual_trigger"
+
+# Documentation
+documentation:
+  auto_generate: true
+  include:
+    - "API documentation"
+    - "Deployment notes"
+    - "Change logs"
+    - "Troubleshooting guides"
+    
+  formats:
+    - "Markdown"
+    - "HTML"
+    - "PDF"
+
+# Maintenance
+maintenance:
+  cleanup:
+    enabled: true
+    schedule: "0 2 * * 0"  # Every Sunday at 2 AM UTC
+    retention_days: 30
+    
+  updates:
+    dependency_updates: true
+    security_patches: true
+    tool_updates: false

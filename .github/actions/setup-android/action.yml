@@ -1,0 +1,46 @@
+name: 'Setup Android Development Environment'
+description: 'Setup Android development environment with JDK, Gradle, and Android SDK'
+
+inputs:
+  java-version:
+    description: 'Java version to use'
+    required: false
+    default: '17'
+  gradle-version:
+    description: 'Gradle version to use'
+    required: false
+    default: '8.4'
+  android-sdk-version:
+    description: 'Android SDK version to use'
+    required: false
+    default: '34'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: ${{ inputs.java-version }}
+        distribution: 'temurin'
+        cache: gradle
+        
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v2
+      with:
+        sdk-platform: ${{ inputs.android-sdk-version }}
+        sdk-build-tools: ${{ inputs.android-sdk-version }}
+        
+    - name: Cache Gradle packages
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
+    - name: Grant execute permission for gradlew
+      shell: bash
+      run: chmod +x gradlew

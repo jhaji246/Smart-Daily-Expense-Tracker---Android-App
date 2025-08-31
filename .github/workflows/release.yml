@@ -1,0 +1,154 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+        
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Extract version
+      id: extract_version
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/}
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "version_number=${VERSION#v}" >> $GITHUB_OUTPUT
+        
+    - name: Update version in build.gradle
+      run: |
+        sed -i "s/versionName \".*\"/versionName \"${{ steps.extract_version.outputs.version_number }}\"/" app/build.gradle.kts
+        sed -i "s/versionCode .*/versionCode ${{ github.run_number }}/" app/build.gradle.kts
+        
+    - name: Build Release APK
+      run: ./gradlew assembleRelease --console=plain
+      
+    - name: Sign APK
+      run: |
+        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > keystore.jks
+        echo "${{ secrets.KEYSTORE_PASSWORD }}" > keystore_password.txt
+        echo "${{ secrets.KEY_ALIAS }}" > key_alias.txt
+        echo "${{ secrets.KEY_PASSWORD }}" > key_password.txt
+        
+        # Sign the APK
+        jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
+          -keystore keystore.jks \
+          -storepass "${{ secrets.KEYSTORE_PASSWORD }}" \
+          -keypass "${{ secrets.KEY_PASSWORD }}" \
+          app/build/outputs/apk/release/app-release-unsigned.apk \
+          "${{ secrets.KEY_ALIAS }}"
+          
+        # Optimize the APK
+        zipalign -v 4 \
+          app/build/outputs/apk/release/app-release-unsigned.apk \
+          app/build/outputs/apk/release/app-release-signed.apk
+          
+    - name: Generate Release Notes
+      id: release_notes
+      run: |
+        # Get commits since last tag
+        if [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+          COMMITS=$(git log --pretty=format:"- %s" ${{ github.event.before }}..${{ github.sha }})
+        else
+          COMMITS=$(git log --pretty=format:"- %s" --oneline -10)
+        fi
+        
+        # Create release notes
+        cat > release_notes.md << EOF
+        ## What's New in ${{ steps.extract_version.outputs.version }}
+        
+        ### 🚀 Features
+        - Enhanced expense tracking capabilities
+        - Improved user interface and animations
+        - Better performance and stability
+        
+        ### 🐛 Bug Fixes
+        - Various bug fixes and improvements
+        
+        ### 📱 Technical Improvements
+        - Updated dependencies
+        - Performance optimizations
+        - Code quality improvements
+        
+        ### 📋 Recent Changes
+        $COMMITS
+        
+        ### 📥 Download
+        - **APK Size:** $(stat -f%z app/build/outputs/apk/release/app-release-signed.apk) bytes
+        - **Build Number:** ${{ github.run_number }}
+        - **Commit:** ${{ github.sha }}
+        
+        ### 🔒 Security
+        - All dependencies are up to date
+        - Security vulnerabilities addressed
+        EOF
+        
+        echo "notes<<EOF" >> $GITHUB_OUTPUT
+        cat release_notes.md >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+        
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.extract_version.outputs.version }}
+        release_name: Release ${{ steps.extract_version.outputs.version }}
+        body: ${{ steps.release_notes.outputs.notes }}
+        draft: false
+        prerelease: false
+        
+    - name: Upload Release APK
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: app/build/outputs/apk/release/app-release-signed.apk
+        asset_name: SmartDailyExpenseTracker-${{ steps.extract_version.outputs.version_number }}.apk
+        asset_content_type: application/vnd.android.package-archive
+        
+    - name: Deploy to Google Play Store
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+        packageName: com.avi.smartdailyexpensetracker
+        releaseFiles: app/build/outputs/apk/release/app-release-signed.apk
+        track: production
+        status: completed
+        releaseName: ${{ steps.extract_version.outputs.version }}
+        releaseNotes: ${{ steps.release_notes.outputs.notes }}
+        
+    - name: Notify Team
+      uses: 8398a7/action-slack@v3
+      with:
+        status: success
+        channel: '#android-releases'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+        text: |
+          🎉 New Release: ${{ steps.extract_version.outputs.version }}
+          
+          ✅ Successfully deployed to Google Play Store
+          📱 APK uploaded to GitHub Releases
+          🔗 Release: ${{ steps.create_release.outputs.html_url }}

@@ -1,0 +1,133 @@
+name: Dependency Update
+
+on:
+  schedule:
+    # Run every Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    inputs:
+      dependency_type:
+        description: 'Type of dependency to update'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+        - all
+        - security
+        - major
+        - minor
+        - patch
+
+jobs:
+  dependency-check:
+    name: Check Dependencies
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Run Dependency Check
+      uses: dependency-check/Dependency-Check_Action@main
+      with:
+        project: 'Smart Daily Expense Tracker'
+        path: '.'
+        format: 'HTML'
+        out: 'reports'
+        args: >
+          --failOnCVSS 7
+          --enableRetired
+          
+    - name: Upload Security Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: dependency-security-report
+        path: reports/
+        
+    - name: Create Issue for Vulnerabilities
+      uses: actions/github-script@v6
+      if: failure()
+      with:
+        script: |
+          const fs = require('fs');
+          const reportPath = 'reports/dependency-check-report.html';
+          
+          if (fs.existsSync(reportPath)) {
+            const report = fs.readFileSync(reportPath, 'utf8');
+            const vulnerabilityCount = (report.match(/Vulnerabilities Found: (\d+)/) || [])[1] || 'Unknown';
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚨 Security Vulnerabilities Found: ${vulnerabilityCount}`,
+              body: `## Security Alert
+              
+              **Vulnerabilities Found:** ${vulnerabilityCount}
+              **Report:** [View Full Report](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}/artifacts)
+              
+              Please review and update dependencies as soon as possible.
+              
+              ### Next Steps:
+              1. Review the security report
+              2. Update vulnerable dependencies
+              3. Test thoroughly
+              4. Deploy security updates`,
+              labels: ['security', 'dependencies', 'high-priority']
+            });
+          }
+
+  update-dependencies:
+    name: Update Dependencies
+    runs-on: ubuntu-latest
+    needs: dependency-check
+    if: github.event.inputs.dependency_type != 'security'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Update Dependencies
+      run: |
+        ./gradlew dependencyUpdates --console=plain
+        ./gradlew useLatestVersions --console=plain
+        
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: 'chore: update dependencies'
+        title: '🔄 Update Dependencies'
+        body: |
+          ## Dependency Updates
+          
+          This PR updates dependencies to their latest versions.
+          
+          ### Changes:
+          - Automated dependency updates
+          - Security patches
+          - Bug fixes
+          
+          ### Testing Required:
+          - [ ] Unit tests pass
+          - [ ] Integration tests pass
+          - [ ] Manual testing completed
+          
+          ### Notes:
+          Generated automatically by CI/CD pipeline
+        branch: dependency-updates
+        delete-branch: true

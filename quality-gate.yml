@@ -1,0 +1,229 @@
+# SonarQube Quality Gate Configuration
+# This file defines the quality thresholds that must be met for code to pass quality checks
+
+# Quality Gate Name: Smart Daily Expense Tracker Quality Gate
+# Description: Strict quality standards for production-ready Android application
+
+# Code Coverage Requirements
+coverage:
+  # Overall code coverage must be at least 80%
+  overall: 80
+  
+  # New code coverage must be at least 90%
+  new_code: 90
+  
+  # Unit test coverage must be at least 85%
+  unit_tests: 85
+
+# Duplicated Code Requirements
+duplications:
+  # Maximum duplicated lines allowed
+  max_duplicated_lines: 3
+  
+  # Maximum duplicated blocks allowed
+  max_duplicated_blocks: 2
+  
+  # Maximum duplicated files allowed
+  max_duplicated_files: 1
+
+# Code Smells Requirements
+code_smells:
+  # Maximum code smells allowed
+  max_code_smells: 50
+  
+  # Maximum new code smells allowed
+  max_new_code_smells: 10
+  
+  # Maximum code smells per 1000 lines
+  max_code_smells_per_1000_lines: 10
+
+# Bugs Requirements
+bugs:
+  # Maximum bugs allowed
+  max_bugs: 10
+  
+  # Maximum new bugs allowed
+  max_new_bugs: 2
+  
+  # Maximum bugs per 1000 lines
+  max_bugs_per_1000_lines: 2
+
+# Vulnerabilities Requirements
+vulnerabilities:
+  # Maximum vulnerabilities allowed
+  max_vulnerabilities: 5
+  
+  # Maximum new vulnerabilities allowed
+  max_new_vulnerabilities: 1
+  
+  # Maximum vulnerabilities per 1000 lines
+  max_vulnerabilities_per_1000_lines: 1
+
+# Security Hotspots Requirements
+security_hotspots:
+  # Maximum security hotspots allowed
+  max_security_hotspots: 20
+  
+  # Maximum new security hotspots allowed
+  max_new_security_hotspots: 5
+  
+  # Maximum security hotspots per 1000 lines
+  max_security_hotspots_per_1000_lines: 5
+
+# Technical Debt Requirements
+technical_debt:
+  # Maximum technical debt ratio allowed (percentage)
+  max_technical_debt_ratio: 5
+  
+  # Maximum new technical debt ratio allowed
+  max_new_technical_debt_ratio: 2
+
+# Maintainability Requirements
+maintainability:
+  # Maximum cyclomatic complexity per method
+  max_cyclomatic_complexity: 15
+  
+  # Maximum cognitive complexity per method
+  max_cognitive_complexity: 20
+  
+  # Maximum method length (lines)
+  max_method_length: 60
+  
+  # Maximum class length (lines)
+  max_class_length: 500
+  
+  # Maximum parameter count per method
+  max_parameters: 6
+
+# Reliability Requirements
+reliability:
+  # Maximum reliability rating (A, B, C, D, E)
+  min_reliability_rating: "A"
+  
+  # Maximum new reliability rating
+  min_new_reliability_rating: "A"
+
+# Security Requirements
+security:
+  # Maximum security rating (A, B, C, D, E)
+  min_security_rating: "A"
+  
+  # Maximum new security rating
+  min_new_security_rating: "A"
+
+# Maintainability Requirements
+maintainability_rating:
+  # Maximum maintainability rating (A, B, C, D, E)
+  min_maintainability_rating: "A"
+  
+  # Maximum new maintainability rating
+  min_new_maintainability_rating: "A"
+
+# Custom Rules
+custom_rules:
+  # No TODO comments in production code
+  no_todo_comments: true
+  
+  # No FIXME comments in production code
+  no_fixme_comments: true
+  
+  # No debug print statements
+  no_debug_prints: true
+  
+  # Proper exception handling
+  proper_exception_handling: true
+  
+  # No hardcoded strings
+  no_hardcoded_strings: true
+  
+  # Proper resource management
+  proper_resource_management: true
+
+# Language-Specific Rules
+language_rules:
+  kotlin:
+    # Kotlin-specific quality rules
+    no_unsafe_calls: true
+    proper_null_handling: true
+    no_unused_imports: true
+    proper_extension_functions: true
+    
+  java:
+    # Java-specific quality rules
+    no_unchecked_warnings: true
+    proper_generics_usage: true
+    no_raw_types: true
+    proper_annotation_usage: true
+
+# Android-Specific Rules
+android_rules:
+  # No hardcoded dimensions
+  no_hardcoded_dimensions: true
+  
+  # Proper resource usage
+  proper_resource_usage: true
+  
+  # No memory leaks
+  no_memory_leaks: true
+  
+  # Proper lifecycle management
+  proper_lifecycle_management: true
+  
+  # No ANR (Application Not Responding) issues
+  no_anr_issues: true
+
+# Performance Rules
+performance_rules:
+  # No expensive operations on main thread
+  no_main_thread_blocking: true
+  
+  # Proper background processing
+  proper_background_processing: true
+  
+  # Efficient data structures usage
+  efficient_data_structures: true
+  
+  # Proper caching strategies
+  proper_caching_strategies: true
+
+# Documentation Requirements
+documentation:
+  # Public APIs must be documented
+  public_api_documentation: true
+  
+  # Complex methods must have inline comments
+  complex_method_documentation: true
+  
+  # README must be up to date
+  readme_up_to_date: true
+  
+  # API documentation must be generated
+  api_documentation_generated: true
+
+# Testing Requirements
+testing:
+  # All public methods must have unit tests
+  public_methods_tested: true
+  
+  # Edge cases must be covered
+  edge_cases_covered: true
+  
+  # Integration tests must exist
+  integration_tests_exist: true
+  
+  # UI tests must exist for critical flows
+  ui_tests_exist: true
+
+# Code Review Requirements
+code_review:
+  # All code must be reviewed
+  code_review_required: true
+  
+  # No direct pushes to main branch
+  no_direct_main_pushes: true
+  
+  # Pull request approval required
+  pr_approval_required: true
+  
+  # Automated checks must pass
+  automated_checks_pass: true
