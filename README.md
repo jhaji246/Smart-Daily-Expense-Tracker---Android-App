@@ -267,9 +267,3 @@ app/src/main/java/com/avi/smartdailyexpensetracker/
 ## 📝 License
 
 This project is created for educational and assignment purposes.
-
----
-
-**Submission Package:** `Abhilash_Kumar_Jha_Assignment.zip`  
-**Total Development Time:** 30 hours of Time
-**AI Collaboration:** Extensive use of AI for architecture, coding, testing, and problem-solving
