@@ -164,36 +164,29 @@ This project was developed using **AI-native development practices** with extens
 <div align="center">
   <img src="https://github.com/user-attachments/assets/34019f93-bde6-4833-a3a1-abfb4709029d" alt="Expense Entry Screen width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
   <p><strong>Expense Entry Screen</strong></p>
-</div> <div align="center">
+</div> 
+<div align="center">
   <img src="https://github.com/user-attachments/assets/e04dbb23-1aa9-493c-8e2d-fc266d1447a8" alt="Expense List Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
   <p><strong>Expense List Screen</strong></p>
 </div>
 
-
-
 <div align="center">
-  <img src="screenshots/expense-report.png" alt="Expense Report Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <img src="[screenshots/expense-report.png](https://github.com/user-attachments/assets/74315fed-70b1-4199-bf0f-5c6e072cc53a)" alt="Expense Report Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
   <p><strong>Expense Report Screen</strong></p>
 </div>
 
 <div align="center">
-  <img src="screenshots/theme-switcher.png" alt="Theme Switcher" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <img src="[[screenshots/search-filtering.png](https://github.com/user-attachments/assets/7386bf27-4d50-4ac4-9cc2-1656bff72fec)](https://github.com/user-attachments/assets/8045a102-69e4-426b-8120-5d33b8d1ba75)" alt="Search & Filtering" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Search and Filter</strong></p>
+</div>
+
+<div align="center">
+  <img src="[screenshots/search-filtering.png](https://github.com/user-attachments/assets/7386bf27-4d50-4ac4-9cc2-1656bff72fec)" alt="Search & Filtering" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
   <p><strong>Theme Switcher</strong></p>
 </div>
-
 <div align="center">
-  <img src="screenshots/search-filtering.png" alt="Search & Filtering" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
-  <p><strong>Search & Filtering</strong></p>
-</div>
-
-<div align="center">
-  <img src="screenshots/charts-analytics.png" alt="Charts & Analytics" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <img src="[screenshots/charts-analytics.png](https://github.com/user-attachments/assets/79be18cc-bce6-450b-bafa-24f36fa588e9)" alt="Charts & Analytics" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
   <p><strong>Charts & Analytics</strong></p>
-</div>
-
-<div align="center">
-  <img src="screenshots/intelligent-insights.png" alt="Intelligent Insights" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
-  <p><strong>Intelligent Insights</strong></p>
 </div>
 
 ### **Option 2: Markdown Format (Alternative)**
