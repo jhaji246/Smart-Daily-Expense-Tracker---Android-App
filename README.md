@@ -161,17 +161,6 @@ This project was developed using **AI-native development practices** with extens
 ### **Option 1: HTML Format (Recommended)**
 <div align="center" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
   <div>
-    <img src="screenshots/expense-entry.png" alt="Expense Entry Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
-    <p><strong>Expense Entry Screen</strong></p>
-  </div>
-  
-  <div>
-    <img src="screenshots/expense-list.png" alt="Expense List Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
-    <p><strong>Expense List Screen</strong></p>
-  </div>
-</div>
-<div align="center" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-  <div>
     <img src="https://github.com/user-attachments/assets/afec6049-ff9c-437a-8366-9a455aab16ba" alt="Expense Report Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
     <p><strong>Expense Report Screen</strong></p>
   </div>
