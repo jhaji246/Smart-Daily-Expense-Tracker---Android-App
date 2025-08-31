@@ -172,8 +172,8 @@ This project was developed using **AI-native development practices** with extens
 </div>
 
 <div align="center">
-  <img src="[https://github.com/user-attachments/assets/e04dbb23-1aa9-493c-8e2d-fc266d1447a8](https://github.com/user-attachments/assets/26ca9b0f-c873-4f49-b947-c4cd3474f7f8)" alt="Expense List Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
-  <p><strong>Expense List Screen</strong></p>
+  <img src="https://github.com/user-attachments/assets/afec6049-ff9c-437a-8366-9a455aab16ba" alt="Expense List Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Expense Report Screen</strong></p>
 </div>
 
 ### **Option 2: Markdown Format (Alternative)**
