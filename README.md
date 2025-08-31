@@ -147,8 +147,7 @@ This project was developed using **AI-native development practices** with extens
 
 ## 📥 APK Download Link
 
-**APK File:** `app-debug.apk` (included in submission package)
-https://drive.google.com/file/d/1jFxc1eg_bonjG5nynvqYTj4BOX4HM8Sw/view?usp=sharing
+**APK File: https://drive.google.com/file/d/1jFxc1eg_bonjG5nynvqYTj4BOX4HM8Sw/view?usp=sharing
 
 **Installation Instructions:**
 1. Enable "Install from Unknown Sources" in Android settings
