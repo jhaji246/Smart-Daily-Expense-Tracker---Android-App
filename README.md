@@ -158,11 +158,14 @@ This project was developed using **AI-native development practices** with extens
 
 **Note:** Screenshots are included in the `screenshots/` folder showing:
 
-### **Option 1: HTML Format (Recommended)**
+| Expense Entry Screen | Expense List Screen | Expense Report Screen | Search and Filter Screen |
+|----------------------|---------------------|------------------------|--------------------------|
+| <img src="https://github.com/user-attachments/assets/2d16f5e6-e206-4877-b0af-f21d026d7636" width="300" height="600" alt="Expense Entry Screen"/> | <img src="https://github.com/user-attachments/assets/02fd990c-031e-4615-88d1-40075143a260" width="300" height="600" alt="Expense List Screen"/> | <img src="https://github.com/user-attachments/assets/afec6049-ff9c-437a-8366-9a455aab16ba" width="300" height="600" alt="Expense Report Screen"/> | <img src="https://github.com/user-attachments/assets/f0fb2ebd-62d5-4c20-bc43-c6a8b6a7b1f8" width="300" height="600" alt="Search and Filter Screen"/> |
 
-| Expense Report Screen | Search and Filter Screen | Theme Switcher | Chart and Analytics |
-|------------------------|--------------------------|----------------|---------------------|
-| <img src="https://github.com/user-attachments/assets/afec6049-ff9c-437a-8366-9a455aab16ba" width="250"/> | <img src="https://github.com/user-attachments/assets/f0fb2ebd-62d5-4c20-bc43-c6a8b6a7b1f8" width="250"/> | <img src="https://github.com/user-attachments/assets/0a79bda8-5aa1-4745-a2df-93869a9664db" width="250"/> | <img src="https://github.com/user-attachments/assets/76005297-dba2-4765-9617-8fec3230b1d1" width="250"/> |
+| Theme Switcher | Chart and Analytics |
+|----------------|----------------------|
+| <img src="https://github.com/user-attachments/assets/0a79bda8-5aa1-4745-a2df-93869a9664db" width="300" height="600" alt="Theme Switcher"/> | <img src="https://github.com/user-attachments/assets/76005297-dba2-4765-9617-8fec3230b1d1" width="300" height="600" alt="Chart and Analytics"/> |
+
 
 ### **Option 2: Markdown Format (Alternative)**
 If HTML doesn't display properly on GitHub, you can use this simpler format:
