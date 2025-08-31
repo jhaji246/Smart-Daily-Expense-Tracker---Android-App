@@ -162,7 +162,7 @@ This project was developed using **AI-native development practices** with extens
 
 
 <div align="center">
-  <img width="1080" height="2160" alt="Expense Entry Screen" src="https://github.com/user-attachments/assets/34019f93-bde6-4833-a3a1-abfb4709029d" />
+  <img width="300" height="600" alt="Expense Entry Screen" src="https://github.com/user-attachments/assets/34019f93-bde6-4833-a3a1-abfb4709029d" />
   <p><strong>Expense Entry Screen</strong></p>
 </div>
 
