@@ -112,6 +112,35 @@ fun ExpenseListHeader(
             
             Spacer(modifier = Modifier.height(16.dp))
             
+            // Search bar
+            OutlinedTextField(
+                value = state.searchQuery,
+                onValueChange = { query -> onEvent(ExpenseListEvent.SearchQueryChanged(query)) },
+                placeholder = { Text("Search expenses by title, notes, or category...") },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search"
+                    )
+                },
+                trailingIcon = {
+                    if (state.searchQuery.isNotBlank()) {
+                        IconButton(
+                            onClick = { onEvent(ExpenseListEvent.SearchQueryChanged("")) }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Clear,
+                                contentDescription = "Clear search"
+                            )
+                        }
+                    }
+                }
+            )
+            
+            Spacer(modifier = Modifier.height(16.dp))
+            
             // Totals row
             Row(
                 modifier = Modifier.fillMaxWidth(),

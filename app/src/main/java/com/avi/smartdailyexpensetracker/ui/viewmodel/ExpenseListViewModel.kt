@@ -20,12 +20,14 @@ data class ExpenseListState(
     val isLoading: Boolean = false,
     val error: String? = null,
     val totalAmount: Double = 0.0,
-    val totalCount: Int = 0
+    val totalCount: Int = 0,
+    val searchQuery: String = ""
 )
 
 sealed class ExpenseListEvent {
     data class DateSelected(val date: LocalDate) : ExpenseListEvent()
     data class CategoryFilterChanged(val category: ExpenseCategory?) : ExpenseListEvent()
+    data class SearchQueryChanged(val query: String) : ExpenseListEvent()
     object ToggleGrouping : ExpenseListEvent()
     object RefreshExpenses : ExpenseListEvent()
 }
@@ -49,6 +51,10 @@ class ExpenseListViewModel(
             }
             is ExpenseListEvent.CategoryFilterChanged -> {
                 _state.value = _state.value.copy(selectedCategory = event.category)
+                loadExpenses()
+            }
+            is ExpenseListEvent.SearchQueryChanged -> {
+                _state.value = _state.value.copy(searchQuery = event.query)
                 loadExpenses()
             }
             is ExpenseListEvent.ToggleGrouping -> {
@@ -76,10 +82,20 @@ class ExpenseListViewModel(
                 
                 // Get expenses for selected date
                 val allExpenses = getExpensesUseCase(currentState.selectedDate)
-                val expenses = if (currentState.selectedCategory != null) {
+                var expenses = if (currentState.selectedCategory != null) {
                     allExpenses.getOrNull()?.filter { it.category == currentState.selectedCategory } ?: emptyList()
                 } else {
                     allExpenses.getOrNull() ?: emptyList()
+                }
+                
+                // Apply search filter if query is not empty
+                if (currentState.searchQuery.isNotBlank()) {
+                    val searchQuery = currentState.searchQuery.lowercase()
+                    expenses = expenses.filter { expense ->
+                        expense.title.lowercase().contains(searchQuery) ||
+                        expense.notes?.lowercase()?.contains(searchQuery) == true ||
+                        expense.category.displayName.lowercase().contains(searchQuery)
+                    }
                 }
                 
                 val totalAmount = expenses.sumOf { it.amount }
