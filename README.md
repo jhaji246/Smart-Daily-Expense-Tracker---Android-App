@@ -157,12 +157,57 @@ This project was developed using **AI-native development practices** with extens
 ## 📸 Screenshots
 
 **Note:** Screenshots are included in the `screenshots/` folder showing:
-- Expense Entry Screen
-- Expense List Screen
-- Expense Report Screen
-- Theme Switcher
-- Search & Filtering
-- Charts & Analytics
+
+### **Option 1: HTML Format (Recommended)**
+<div align="center">
+  <img src="screenshots/expense-entry.png" alt="Expense Entry Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Expense Entry Screen</strong></p>
+</div>
+
+<div align="center">
+  <img src="screenshots/expense-list.png" alt="Expense List Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Expense List Screen</strong></p>
+</div>
+
+<div align="center">
+  <img src="screenshots/expense-report.png" alt="Expense Report Screen" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Expense Report Screen</strong></p>
+</div>
+
+<div align="center">
+  <img src="screenshots/theme-switcher.png" alt="Theme Switcher" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Theme Switcher</strong></p>
+</div>
+
+<div align="center">
+  <img src="screenshots/search-filtering.png" alt="Search & Filtering" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Search & Filtering</strong></p>
+</div>
+
+<div align="center">
+  <img src="screenshots/charts-analytics.png" alt="Charts & Analytics" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Charts & Analytics</strong></p>
+</div>
+
+<div align="center">
+  <img src="screenshots/intelligent-insights.png" alt="Intelligent Insights" width="300" height="600" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <p><strong>Intelligent Insights</strong></p>
+</div>
+
+### **Option 2: Markdown Format (Alternative)**
+If HTML doesn't display properly on GitHub, you can use this simpler format:
+
+| Screen | Screenshot |
+|--------|------------|
+| **Expense Entry** | ![Expense Entry](screenshots/expense-entry.png) |
+| **Expense List** | ![Expense List](screenshots/expense-list.png) |
+| **Expense Report** | ![Expense Report](screenshots/expense-report.png) |
+| **Theme Switcher** | ![Theme Switcher](screenshots/theme-switcher.png) |
+| **Search & Filtering** | ![Search & Filtering](screenshots/search-filtering.png) |
+| **Charts & Analytics** | ![Charts & Analytics](screenshots/charts-analytics.png) |
+| **Intelligent Insights** | ![Intelligent Insights](screenshots/intelligent-insights.png) |
+
+**Note:** All screenshots are optimized for GitHub display with consistent sizing and professional appearance.
 
 ## 👨‍💻 Developer Information
 
