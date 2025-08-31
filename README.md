@@ -163,15 +163,17 @@ This project was developed using **AI-native development practices** with extens
 - Theme Switcher
 - Search & Filtering
 - Charts & Analytics
-- 
-<img width="1080" height="2160" alt="Expense Entry Screen" src="https://github.com/user-attachments/ass<img width="1080" height="2160" alt="Expense List Screen" src="https://github.com/user-attachments/assets/cb9bee04-7392-4f49-bff2-513202bc56da" />
-ets/c86599ee-6d56-4636-bf15-715a7fed8277" />
-img width="1080" height="2160" alt="Expense Report Screen" src="https://github.com/user-attachments/assets/aa34ede1-7543-4d60-b09b-1953e2564696" />
-<img width="1080" height="2160" alt="Theme Switcher" src="https://github.com/user-attachments/assets/f0cc00f2-f05f-4322-970c-58fe4d166469" />
-<img width="1080" height="2160" alt="Charts   Analytics" src="https://github.com/user-attachments/assets/4600859c-31ca-4ce7-9ffb-da024b9cc9d0" />
+<img width="1080" height="2160" alt="Expense Entry Screen" src="https://github.com/user-attachments/assets/31b54ec2-84a1-452e-a5bb-5ba8473451d2" />
 
+<img width="1080" height="2160" alt="Expense List Screen" src="https://github.com/user-attachments/assets/1f918c6e-0250-4c81-9dfb-3b4da33ac5ac" />
 
-- 
+<img width="1080" height="2160" alt="Expense Report Screen" src="https://github.com/user-attachments/assets/486a91d0-3497-4895-a1e6-b70987002469" />
+
+<img width="1080" height="2160" alt="Theme Switcher" src="https://github.com/user-attachments/assets/f1e87df6-cbde-4646-bee2-454a6b096551" />
+
+<img width="1080" height="2160" alt="Charts   Analytics" src="https://github.com/user-attachments/assets/2e0b263a-ecbd-400c-ae0d-22008ec97a6e" />
+
+-  
 
 ## 👨‍💻 Developer Information
 
